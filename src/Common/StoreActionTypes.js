@@ -1,0 +1,28 @@
+const FETCH_SUCCESS = "FETCH_SUCCESS";
+const FETCH_ERROR = "FETCH_ERROR";
+
+export const FETCH_FAILED = "FETCH_FAILED";
+export const UN_AUTHORISED = "UN_AUTHORISED";
+export const NOT_FOUND = "PAGE_NOT_FOUND";
+export const NOT_ACTIVATED = "NOT_ACTIVATED";
+export const SHOW_LOADER = "SHOW_LOADER";
+export const SEARCH_LOADER = "SEARCH_LOADER";
+export const CURRENT_API = "CURRENT_API";
+
+// //Countries
+// const COUNTRIES_LIST = "COUNTRIES_LIST"
+// export const COUNTRIES_LIST_FETCH = COUNTRIES_LIST;
+// export const COUNTRIES_LIST_FETCH_SUCCESS = COUNTRIES_LIST + '_' + FETCH_SUCCESS;
+// export const COUNTRIES_LIST_FETCH_ERROR = COUNTRIES_LIST + '_' + FETCH_ERROR;
+
+//Login
+
+const LOGIN = "LOGIN";
+export const LOGIN_FETCH = LOGIN;
+export const LOGIN_FETCH_SUCCESS = LOGIN_FETCH + "_" + FETCH_SUCCESS;
+export const LOGIN_FETCH_ERROR = LOGIN_FETCH + "_" + FETCH_ERROR;
+
+// Logout
+
+const LOGOUT = "LOGOUT";
+export const LOGOUT_FETCH = LOGOUT;
