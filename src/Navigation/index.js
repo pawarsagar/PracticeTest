@@ -17,7 +17,7 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <NavigationContainer>
-      <Tab.Navigator /* tabBar={(props) => <BottomTab {...props} />} */>
+      <Tab.Navigator tabBar={(props) => <BottomTab {...props} />}>
         <Tab.Screen name={AppNavKeys.HomeFeed} component={HomeFeed} />
         <Tab.Screen name={AppNavKeys.TestStrip} component={TestStrip} />
       </Tab.Navigator>

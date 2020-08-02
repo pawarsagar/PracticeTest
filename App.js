@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { View, StatusBar, SafeAreaView } from 'react-native';
+import { View, StatusBar, SafeAreaView, LogBox } from 'react-native';
 import MainRouteConfig from './src/Navigation';
 import Navigator from './src/Common/Navigator';
 import { createStore, applyMiddleware } from 'redux';
@@ -8,9 +8,9 @@ import mainReducer from './src/store/MainReducer';
 import ReduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { COLORS } from './src/assets';
-// import Loader from './src/Components/Loader/Loader';
+import Loader from './src/Components/Loader/Loader';
 // import { COLORS } from './src/assets';
-
+LogBox.ignoreAllLogs()
 const logger = createLogger({
   level: 'log',
   logger: console,
@@ -49,7 +49,7 @@ const App = () => {
           hidden={false}
           barStyle="dark-content" backgroundColor='transparent' />
         <SafeAreaView style={{ flex: 1 }}>
-          {/*    <Loader /> */}
+          <Loader />
           <MainRouteConfig
             ref={navigatorRef => {
               Navigator.setContainer(navigatorRef);

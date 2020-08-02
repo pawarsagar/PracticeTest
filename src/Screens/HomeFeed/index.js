@@ -5,7 +5,7 @@ import { normalize } from '../../Common/FontSize';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getVideoAction } from '../../store/actions/HomeFeedActions';
-import { GET_VIDEO_FETCH } from '../../Common/StoreActionTypes';
+import { GET_VIDEO_FETCH, FETCH_FAILED } from '../../Common/StoreActionTypes';
 import styles from './styles';
 import ImagePicker from 'react-native-image-picker';
 
@@ -21,19 +21,36 @@ class HomeFeed extends Component {
         this.state = {
             videos: [],
             imagePath: '',
-            imageLoading: false
+            imageLoading: false,
+            isFetching: false
         };
+
+
     }
 
     componentDidMount = () => {
-        this.props.getVideoAction()
+        const onFocusListener = this.props.navigation.addListener('focus', () => {
+            this.props.getVideoAction()
+        });
     };
 
 
-    renderItem = ({ item }) => {
-        return <VideoPlayerComponent data={item} />
+
+
+    renderItem = (item) => {
+        return <VideoPlayerComponent
+            data={item.item}
+            key={item.index}
+        />
     }
 
+    onRefresh() {
+        this.setState({
+            isFetching: true
+        }, () => {
+            this.props.getVideoAction()
+        })
+    }
 
     onImagePicker = () => {
 
@@ -41,8 +58,7 @@ class HomeFeed extends Component {
 
         checkMultiple(permission).then(
             (statuses) => {
-                console.log('Camera', statuses[PERMISSIONS.IOS.CAMERA]);
-                console.log('FaceID', statuses[PERMISSIONS.IOS.FACE_ID]);
+                console.log(statuses)
             },
         );
 
@@ -87,28 +103,36 @@ class HomeFeed extends Component {
                         imageLoading={this.state.imageLoading}
                     />
                 </View>
-                <Form>
-                    <View style={{ margin: normalize(15) }}>
-                        <FlatList
-                            data={this.state.videos}
-                            renderItem={this.renderItem}
-                            keyExtractor={item => item.id}
-                        />
-                    </View>
-                </Form>
+                <View style={{ margin: normalize(15) }}>
+                    <FlatList
+                        contentContainerStyle={{ paddingBottom: normalize(75) }}
+                        data={this.state.videos}
+                        renderItem={(item, index) => { return this.renderItem(item, index) }}
+                        refreshing={this.state.isFetching}
+                        onRefresh={() => this.onRefresh()}
+                    />
+                </View>
             </View>
 
         );
     }
     async componentWillReceiveProps(nextProps) {
         const { CommonReducer, HomeScreenFeed } = nextProps;
+
+        if (nextProps.CommonReducer.isLoading || (this.props.CommonReducer.isLoading != nextProps.CommonReducer.isLoading)) {
+            return
+        }
+
+
+
         switch (CommonReducer.apiType) {
             case GET_VIDEO_FETCH: {
                 if (HomeScreenFeed.videoList.length > 0) {
-                    this.setState({ videos: HomeScreenFeed.videoList })
+                    this.setState({ videos: HomeScreenFeed.videoList, isFetching: false })
                 }
                 break;
             }
+
 
             default:
                 break;

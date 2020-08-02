@@ -5,14 +5,14 @@ platform :ios, '10.0'
 
 target 'SimformPractical' do
   config = use_native_modules!
-
+  
   use_react_native!(:path => config["reactNativePath"])
-
+  
+  pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary.podspec"
   target 'SimformPracticalTests' do
     inherit! :complete
     # Pods for testing
   end
-  pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary.podspec"
   # Enables Flipper.
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and

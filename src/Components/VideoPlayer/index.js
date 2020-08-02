@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Pressable, } from 'react-native';
+import { View, Pressable, Image } from 'react-native';
 import { normalize } from '../../Common/FontSize';
 import { COLORS } from '../../assets';
 import { Regular, SemiBold } from '../../assets/Fonts';
 import { CustomText } from '..';
 import Video from 'react-native-video';
+import { Assets } from '../../assets/Icons';
 
 
 export default class VideoPlayer extends Component {
@@ -18,30 +19,29 @@ export default class VideoPlayer extends Component {
     }
 
     render() {
-        const { data } = this.props
+        const { data, } = this.props
         return (
             <View>
                 <Pressable
                     onPress={() => { this.setState({ paused: !this.state.paused }) }}
                     style={{
-
                         height: normalize(150),
                         width: '100%',
-                        backgroundColor: 'white',
+                        backgroundColor: 'black',
                         borderRadius: normalize(12),
                         overflow: 'hidden',
                         borderWidth: 0.5,
-                        // justifyContent: 'center',
                     }}
                 >
                     <View style={{
                         height: normalize(150),
                         width: '100%',
                     }}>
-                        <Video source={{ uri: data.video_url }}   // Can be a URL or a local file.
+                        <Video
+                            source={{ uri: data.video_url }}
                             ref={(ref) => {
                                 this.player = ref
-                            }}                                      // Store reference
+                            }}
                             onBuffer={() => { this.setState({ onError: false, onBuffer: true }) }}
                             onError={(err) => { this.setState({ onError: true }) }}
                             paused={this.state.paused}
@@ -61,6 +61,10 @@ export default class VideoPlayer extends Component {
                         </Video>
                     </View>
                     <View style={{ bottom: normalize(75), alignItems: 'center', }}>
+                        {this.state.paused && < Image
+                            source={Assets.playImage}
+                            style={{ height: normalize(35), width: normalize(35) }}
+                        />}
                         {this.state.onError && <CustomText
                             text='Video is Unavailable Please try again later.'
                             style={{
@@ -87,7 +91,8 @@ export default class VideoPlayer extends Component {
                         },
                         shadowOpacity: 0.43,
                         shadowRadius: 9.51,
-                        elevation: 15,
+                        borderWidth: 0.5,
+                        elevation: this.state.paused ? 15 : -1,
                     }}
                 >
                     <View style={{ margin: normalize(10) }}>
@@ -111,7 +116,7 @@ export default class VideoPlayer extends Component {
                         </View>
                         <View style={{ marginVertical: normalize(5) }}>
                             <CustomText
-                                text='Transforming House'
+                                text={data.title}
                                 style={{
                                     fontFamily: SemiBold,
                                     color: 'black',
@@ -121,7 +126,7 @@ export default class VideoPlayer extends Component {
                         </View>
                         <View>
                             <CustomText
-                                text='Beethovan Symphony'
+                                text={data.title}
                                 style={{ fontFamily: Regular, color: COLORS.gunMetalGrey, fontSize: normalize(10) }}
                             />
                         </View>

@@ -3,6 +3,8 @@ import { View, TouchableOpacity, Image } from 'react-native';
 import { Assets } from '../../assets/Icons';
 import AppNavKeys from '../../Common/AppNavKeys';
 import styles from './styles';
+import { COLORS } from '../../assets';
+import { normalize } from '../../Common/FontSize';
 export default class BottomTab extends Component {
   constructor(props) {
     super(props);
@@ -16,48 +18,29 @@ export default class BottomTab extends Component {
 
     return (
       <View style={styles.bottomTab}>
-        {/* homescreen */}
         <TouchableOpacity
-          onPress={() => navigation.navigate(AppNavKeys.Home)}
+          onPress={() => navigation.navigate(AppNavKeys.HomeFeed)}
           style={{ alignSelf: 'center' }}>
           <Image
-            source={index == 0 ? Assets.selectedHome : Assets.home}
-            style={styles.buttonSize}
+            source={Assets.home}
+            style={[styles.buttonSize, { tintColor: index == 0 ? COLORS.blue : 'black' }]}
             resizeMode="stretch"
           />
         </TouchableOpacity>
-        {/* basketscreen */}
         <TouchableOpacity
           style={{ alignSelf: 'center' }}
-          onPress={() => navigation.navigate(AppNavKeys.Basket)}>
+          onPress={() => navigation.navigate(AppNavKeys.TestStrip)}>
           <Image
-            source={index == 1 ? Assets.selectedBasket : Assets.basket}
-            style={styles.buttonSize}
+            source={Assets.TestStrip}
+            style={{
+              tintColor: index == 1 ? COLORS.blue : 'black',
+              height: normalize(25),
+              width: normalize(25),
+            }}
             resizeMode="stretch"
           />
         </TouchableOpacity>
-        {/* notificationScreen */}
-        <TouchableOpacity
-          style={{ alignSelf: 'center' }}
-          onPress={() => navigation.navigate(AppNavKeys.Notification)}>
-          <Image
-            source={
-              index == 2 ? Assets.selectedNotification : Assets.notification
-            }
-            style={styles.buttonSize}
-            resizeMode="stretch"
-          />
-        </TouchableOpacity>
-        {/* AccountScreen */}
-        <TouchableOpacity
-          style={{ alignSelf: 'center' }}
-          onPress={() => navigation.navigate(AppNavKeys.Account)}>
-          <Image
-            source={index == 3 ? Assets.selectedAccount : Assets.account}
-            style={styles.buttonSize}
-            resizeMode="stretch"
-          />
-        </TouchableOpacity>
+
       </View>
     );
   }
