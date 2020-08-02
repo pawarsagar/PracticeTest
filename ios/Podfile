@@ -1,6 +1,6 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
-
+permissions_path = '../node_modules/react-native-permissions/ios'
 platform :ios, '10.0'
 
 target 'SimformPractical' do
@@ -12,7 +12,7 @@ target 'SimformPractical' do
     inherit! :complete
     # Pods for testing
   end
-
+  pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary.podspec"
   # Enables Flipper.
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and

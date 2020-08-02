@@ -1,5 +1,7 @@
 export default (COLORS = {
-  primary: '#6EBC6C',
+
   white: '#FFFFFF',
-  gunMetalGrey: '#47535B'
+  gunMetalGrey: '#47535B',
+  grey: 'rgb(174,174,174)',
+  blue: 'rgb(017,125,255)'
 });

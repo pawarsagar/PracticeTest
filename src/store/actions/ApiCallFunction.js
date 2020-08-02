@@ -3,9 +3,9 @@ import { store } from "../../../App";
 
 /* GET Api Call */
 export async function getFetch(apiUrl, actionType, header = {}, body = {}) {
-    const {isConnected} = await NetInfo.fetch();
-    console.log(isConnected,'<----- isConnected');
-    
+    const { isConnected } = await NetInfo.fetch();
+    console.log(isConnected, '<----- isConnected');
+
     if (isConnected) {
         console.log({
             url: apiUrl,
@@ -24,11 +24,11 @@ export async function getFetch(apiUrl, actionType, header = {}, body = {}) {
                 // 'Authorization': 'Basic ' + btoa(userHeader + ':' + passwordHeader)
             },
         }).then((response) => {
-            console.log(response,'<----- response');
-            
+            console.log(response, '<----- response');
+
             return response.json()
         }).then((responseJson) => {
-            console.log(responseJson,'<----- responseJson');
+            console.log(responseJson, '<----- responseJson');
             return responseJson;
         }).catch((error) => {
             console.log(error)
@@ -45,15 +45,30 @@ export var getApi = (apiUrl, actionType, header = {}, body = {}) => {
     return new Promise(async (resolve, reject) => {
         const resData = await getFetch(apiUrl, actionType, header, body);
         // console.log("Get Response:- " + JSON.stringify(resData))
-        console.log(resData,'<------ reSData');
-        
-        if (resData == false || resData.responseCode == 404) {
+        console.log(resData, '<------ reSData');
+
+
+        /* For this Particular API ONlY */
+
+        if (resData == false /* || resData.responseCode == 404 */) {
             reject({ responseCode: 404, message: "Network Error! Please try again later." })
-        } else if (resData.responseCode == 401) {
-            reject(resData)
-        } else {
+        }
+        else {
             resolve(resData)
         }
+        /* For this Particular API ONlY */
+
+        /* General API FLOW */
+
+        // if (resData == false || resData.responseCode == 404) {
+        //     reject({ responseCode: 404, message: "Network Error! Please try again later." })
+        // } else if (resData.responseCode == 401) {
+        //     reject(resData)
+        // } else {
+        //     resolve(resData)
+        // }
+
+        /* General API FLOW */
     });
 }
 

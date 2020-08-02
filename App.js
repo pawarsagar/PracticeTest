@@ -47,7 +47,7 @@ const App = () => {
       <Fragment>
         <StatusBar
           hidden={false}
-          barStyle="dark-content" backgroundColor={COLORS.primary} />
+          barStyle="dark-content" backgroundColor='transparent' />
         <SafeAreaView style={{ flex: 1 }}>
           {/*    <Loader /> */}
           <MainRouteConfig
