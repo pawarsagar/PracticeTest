@@ -38,7 +38,7 @@ class TestStrip extends Component {
     }
 
     handleObjectCreation = (value) => {
-        const { allSelectedObject = {} } = this.state
+        const { allSelectedObject = {}, allSelectedJson = [] } = this.state
         let reDefine = {
             ...allSelectedObject,
             [value.item.name]: {
@@ -50,9 +50,13 @@ class TestStrip extends Component {
 
         let jsonObject = _.values(_.mapKeys(reDefine, function (value, key) { value.title = key; return value; }));
 
+        let filtered = allSelectedJson.filter((item, index) => item.title != jsonObject[0].title)
+
+
+
         this.setState({
             allSelectedObject: reDefine,
-            allSelectedJson: [...this.state.allSelectedJson, { ...jsonObject[0] }]
+            allSelectedJson: [...filtered, { ...jsonObject[0] }]
         })
     }
 
@@ -152,7 +156,7 @@ class TestStrip extends Component {
                                     this.setState({ modalVisible: false });
                                 }}
                             >
-                                <Text style={styles.textStyle}>Hide Selection</Text>
+                                <Text style={styles.textStyle}>Close</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
