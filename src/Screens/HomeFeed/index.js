@@ -110,7 +110,7 @@ class HomeFeed extends Component {
                         data={this.state.videos}
                         renderItem={(item, index) => { return this.renderItem(item, index) }}
                         refreshing={this.state.isFetching}
-                        onRefresh={() => { this.onRefresh }}
+                        onRefresh={() => { this.onRefresh() }}
                     />
                 </View>
             </View>
