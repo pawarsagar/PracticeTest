@@ -24,8 +24,6 @@ class HomeFeed extends Component {
             imageLoading: false,
             isFetching: false
         };
-
-
     }
 
     componentDidMount = () => {
@@ -53,8 +51,9 @@ class HomeFeed extends Component {
     }
 
     onImagePicker = () => {
-
-        let permission = Platform.OS == 'ios' ? [PERMISSIONS.IOS.CAMERA, PERMISSIONS.IOS.PHOTO_LIBRARY] : [PERMISSIONS.ANDROID.CAMERA]
+        let permission = Platform.OS == 'ios'
+            ? [PERMISSIONS.IOS.CAMERA, PERMISSIONS.IOS.PHOTO_LIBRARY]
+            : [PERMISSIONS.ANDROID.CAMERA]
 
         checkMultiple(permission).then(
             (statuses) => {
@@ -62,18 +61,9 @@ class HomeFeed extends Component {
             },
         );
 
-
         this.setState({ imageLoading: true }, () => {
-
-
             ImagePicker.showImagePicker(options, (response) => {
-                console.log('Response = ', response);
-
                 const source = { uri: response.uri };
-
-                // You can also display the image using data:
-                // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-
                 if (response.didCancel) {
                     this.setState({
                         imagePath: '',
@@ -81,17 +71,14 @@ class HomeFeed extends Component {
                     });
                 }
                 else {
-
                     this.setState({
                         imagePath: source,
                         imageLoading: false
                     });
                 }
-
             });
         })
     }
-
 
     render() {
         return (
@@ -116,15 +103,12 @@ class HomeFeed extends Component {
 
         );
     }
+
     async componentWillReceiveProps(nextProps) {
         const { CommonReducer, HomeScreenFeed } = nextProps;
-
         if (nextProps.CommonReducer.isLoading || (this.props.CommonReducer.isLoading != nextProps.CommonReducer.isLoading)) {
             return
         }
-
-
-
         switch (CommonReducer.apiType) {
             case GET_VIDEO_FETCH: {
                 if (HomeScreenFeed.videoList.length > 0) {
@@ -132,8 +116,6 @@ class HomeFeed extends Component {
                 }
                 break;
             }
-
-
             default:
                 break;
         }
