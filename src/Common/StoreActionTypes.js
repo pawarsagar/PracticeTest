@@ -9,7 +9,10 @@ export const SHOW_LOADER = "SHOW_LOADER";
 export const SEARCH_LOADER = "SEARCH_LOADER";
 export const CURRENT_API = "CURRENT_API";
 
-
+const LOGIN = "LOGIN";
+export const LOGIN_FETCH = LOGIN;
+export const LOGIN_FETCH_SUCCESS = LOGIN_FETCH + "_" + FETCH_SUCCESS;
+export const LOGIN_FETCH_ERROR = LOGIN_FETCH + "_" + FETCH_ERROR;
 
 const GET_VIDEO = "GET_VIDEO";
 export const GET_VIDEO_FETCH = GET_VIDEO;
@@ -23,6 +26,11 @@ export const GET_STRIP_FETCH_SUCCESS = GET_STRIP_FETCH + "_" + FETCH_SUCCESS;
 export const GET_STRIP_FETCH_ERROR = GET_STRIP_FETCH + "_" + FETCH_ERROR;
 
 // Logout
+
+
+
+
+
 
 const LOGOUT = "LOGOUT";
 export const LOGOUT_FETCH = LOGOUT;

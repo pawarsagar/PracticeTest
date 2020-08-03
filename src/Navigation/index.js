@@ -4,7 +4,7 @@ import React from "react";
 // import {createStackNavigator} from 'react-navigation-stack';
 
 import {
-  HomeFeed, TestStrip,
+  HomeFeed, TestStrip, Login,
 
 } from "../Screens";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -27,8 +27,7 @@ function MyTabs() {
 
 export default createAppContainer(createSwitchNavigator(
   {
-    // Login: Login,
-    //  SignUp:SignUP
+    Login: Login,
     App: MyTabs
   },
   {

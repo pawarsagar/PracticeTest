@@ -9,7 +9,7 @@ import {
 
 export const LoginAction = (isLogin = null) => {
   return async (dispatch) => {
-    dispatch({ type: SHOW_LOADER, payload: true });
+    // dispatch({ type: SHOW_LOADER, payload: true });
     // Promise.all(
     //     [getApi(users, GET_FIRST_USERS_DATA_FETCH),
     // ]
