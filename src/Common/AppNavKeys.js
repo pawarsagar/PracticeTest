@@ -1,4 +1,5 @@
 export default (NavConfig = {
   HomeFeed: 'HomeFeed',
-  TestStrip: 'TestStrip'
+  TestStrip: 'TestStrip',
+  Login: "Login"
 });

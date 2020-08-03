@@ -1,15 +1,40 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity, Image, Alert } from 'react-native';
 import { Assets } from '../../assets/Icons';
 import AppNavKeys from '../../Common/AppNavKeys';
 import styles from './styles';
 import { COLORS } from '../../assets';
 import { normalize } from '../../Common/FontSize';
+import CustomText from '../CustomText';
+import Navigator from '../../Common/Navigator';
+import { removeItem } from '../../Common/AsyncConfig'
 export default class BottomTab extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  handleAuth = async () => {
+    Alert.alert(
+      'Logout',
+      'Are you sure you want to Logout?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel'
+        },
+        {
+          text: 'OK', onPress: () => {
+            removeItem('LoginDetails')
+            Navigator.navigate(AppNavKeys.Login)
+          }
+        }
+      ],
+      { cancelable: false }
+    );
+  }
+
 
   render() {
     console.log(this.props, '<------ props');
@@ -39,6 +64,12 @@ export default class BottomTab extends Component {
             }}
             resizeMode="stretch"
           />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={this.handleAuth}
+        >
+          <CustomText text='Logout' style={styles.loginText} />
         </TouchableOpacity>
 
       </View>

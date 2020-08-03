@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import {normalize} from '../../Common/FontSize';
-import {COLORS} from '../../assets';
+import { StyleSheet } from 'react-native';
+import { normalize } from '../../Common/FontSize';
+import { COLORS } from '../../assets';
+import { SemiBold } from '../../assets/Fonts';
 
 export default (styles = StyleSheet.create({
   bottomTab: {
@@ -17,4 +18,18 @@ export default (styles = StyleSheet.create({
     height: normalize(40),
     width: normalize(40),
   },
+  button: {
+    height: normalize(35),
+    width: normalize(80),
+    backgroundColor: COLORS.green,
+    alignSelf: 'center',
+    borderRadius: normalize(12),
+    justifyContent: 'center',
+  },
+  loginText: {
+    fontFamily: SemiBold,
+    fontSize: normalize(16),
+    textAlign: 'center',
+    color: COLORS.white
+  }
 }));
