@@ -11,9 +11,7 @@ import { normalize } from '../../Common/FontSize';
 import { StripBox } from '../../Components';
 import { COLORS } from '../../assets';
 import _ from 'lodash'
-import { SemiBold } from '../../assets/Fonts';
 
-const NUmber = [1, 2, 3, 4, 5]
 class TestStrip extends Component {
     constructor(props) {
         super(props);
@@ -140,12 +138,14 @@ class TestStrip extends Component {
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
 
-                            <FlatList
-                                contentContainerStyle={{ paddingBottom: normalize(75) }}
-                                data={allSelectedJson}
-                                renderItem={(item, index) => { return this.renderList(item) }}
+                            <View style={{ height: normalize(500), width: '100%' }}>
+                                <FlatList
+                                    contentContainerStyle={{ paddingBottom: normalize(75) }}
+                                    data={allSelectedJson}
+                                    renderItem={(item, index) => { return this.renderList(item) }}
 
-                            />
+                                />
+                            </View>
                             <TouchableOpacity
                                 style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
                                 onPress={() => {
@@ -156,8 +156,6 @@ class TestStrip extends Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-
-
                 </Modal>
             </View>
         );

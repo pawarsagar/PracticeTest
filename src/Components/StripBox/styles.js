@@ -66,13 +66,15 @@ export default styles = StyleSheet.create({
         padding: normalize(5)
     },
     textInput: {
-        height: normalize(30),
+        height: normalize(35),
         width: '50%',
         borderRadius: normalize(5),
         borderWidth: normalize(1),
         borderColor: COLORS.grey,
         paddingHorizontal: normalize(10),
-        textAlign: 'center'
+        textAlign: 'center',
+
+
     },
     scrollViewStyle: {
         height: normalize(45),

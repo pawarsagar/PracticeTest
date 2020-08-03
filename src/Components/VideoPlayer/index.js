@@ -19,10 +19,11 @@ export default class VideoPlayer extends Component {
     }
 
     render() {
-        const { data, } = this.props
+        const { data, onPress = () => { } } = this.props
         return (
             <View>
                 <Pressable
+                    onLongPress={() => { onPress(data) }}
                     onPress={() => { this.setState({ paused: !this.state.paused }) }}
                     style={{
                         height: normalize(150),

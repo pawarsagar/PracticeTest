@@ -8,12 +8,18 @@ import { getVideoAction } from '../../store/actions/HomeFeedActions';
 import { GET_VIDEO_FETCH, FETCH_FAILED } from '../../Common/StoreActionTypes';
 import styles from './styles';
 import ImagePicker from 'react-native-image-picker';
+import Share from "react-native-share";
 
 import { checkMultiple, PERMISSIONS } from 'react-native-permissions';
 const options = {
     title: 'Select Avatar',
 
 };
+
+
+
+
+
 
 class HomeFeed extends Component {
     constructor(props) {
@@ -33,10 +39,18 @@ class HomeFeed extends Component {
     };
 
 
+    handleShare = (data) => {
+        Share.open({ url: data.video_url })
+            .then((res) => { console.log(res) })
+            .catch((err) => { err && console.log(err); });
+    }
+
+
 
 
     renderItem = (item) => {
         return <VideoPlayerComponent
+            onPress={this.handleShare}
             data={item.item}
             key={item.index}
         />
@@ -96,7 +110,7 @@ class HomeFeed extends Component {
                         data={this.state.videos}
                         renderItem={(item, index) => { return this.renderItem(item, index) }}
                         refreshing={this.state.isFetching}
-                        onRefresh={() => this.onRefresh()}
+                        onRefresh={() => { this.onRefresh }}
                     />
                 </View>
             </View>
